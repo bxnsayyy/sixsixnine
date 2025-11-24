@@ -1,0 +1,610 @@
+/* RESET ------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000; /* fallback */
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* niente scroll da desktop */
+@media (min-width: 1024px) {
+  body {
+    overflow-y: hidden;
+  }
+}
+
+/* SFONDO ------------------------------------------------------ */
+/* layer di sfondo fissato a tutto schermo */
+.background-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0; /* niente valori negativi, così iOS non lo nasconde */
+}
+
+/* l'IMG .bg-image fa da sfondo, si muove con il JS */
+.bg-image {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                 /* pieno schermo su tutti i device */
+  filter: blur(1px) brightness(0.9);
+  transform: scale(1.05);
+  transition: transform 0.1s linear; /* per il movimento mouse/telefono */
+}
+
+/* NUVOLI BACKGROUND */
+
+.clouds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1; /* davanti allo sfondo, dietro a tutto il resto */
+}
+
+.cloud {
+  position: absolute;
+  width: 300px;
+  opacity: 0.9;
+}
+
+.cloud-left {
+  bottom: 12%;
+  left: -80px;
+}
+
+.cloud-right {
+  top: 12%;
+  right: -80px;
+}
+
+/* animazione nuvole */
+.cloud,
+.cloud-foreground {
+  animation-name: cloudMove;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
+@keyframes cloudMove {
+  from { transform: translateX(-110px); }
+  to   { transform: translateX(110px);  }
+}
+
+/* LAYER PRINCIPALE -------------------------------------------- */
+
+.page-wrapper {
+  min-height: 100vh;
+  padding: 12px 20px 32px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 1024px) {
+  .page-wrapper {
+    padding: 18px 40px 40px;
+  }
+}
+
+/* HEADER: LOGO / NAV / MENU ----------------------------------- */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.logo-img {
+  width: 60px;
+  height: auto;
+	z-index: -2;
+}
+
+/* NAV CENTRALE */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.header-placeholder {
+  width: 60px;   /* uguale alla larghezza del logo-img */
+  height: 1px;   /* invisibile */
+  opacity: 0;
+}
+
+/* la navbar al centro rimane centrata davvero */
+.header-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-btn {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  opacity: 1;
+}
+
+.nav-divider {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+/* MENU ≡ A DESTRA */
+
+
+/* STAGE CENTRALE ---------------------------------------------- */
+
+.main-stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  overflow: visible;
+}
+
+/* ARTISTI + NUMERI -------------------------------------------- */
+
+.artists-strip {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: min(9vw, 140px);
+}
+
+@media (max-width: 900px) {
+  .artists-strip {
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+}
+
+.artist-card {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.artist-card:hover {
+  transform: scale(1.04);
+}
+
+/* contenitore numero dietro artista */
+.big-num-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.big-num {
+  font-family: "Arial Black", Arial, Helvetica, sans-serif;
+  line-height: 1;
+  color: #000000;
+  text-align: center;
+  font-size: clamp(180px, 26vw, 420px);
+}
+
+@media (max-width: 900px) and (orientation: portrait) {
+  .big-num {
+    font-size: clamp(160px, 40vw, 360px);
+  }
+}
+
+.artist-photo {
+  position: relative;
+  z-index: 1;
+}
+
+.artist-photo img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 70vh;         /* limite verticale, ma non fissa */
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .artist-photo img {
+    max-height: 60vh;       /* un po' più piccola su mobile */
+    max-width: 80vw;        /* così in orizzontale si restringe invece di tagliarsi */
+  }
+}
+
+
+/* NUVOLI IN PRIMO PIANO (davanti ai piedi / testa) */
+
+.cloud-foreground {
+  position: absolute;
+  width: 260px;
+  pointer-events: none;
+}
+
+.cloud-foreground-left {
+  left: 6%;
+  bottom: 8%;
+}
+
+.cloud-foreground-right {
+  right: 6%;
+  top: 18%;
+}
+
+/* FOOTER ------------------------------------------------------ */
+
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  
+  padding: 10px 0;
+  text-align: center;
+  z-index: 10;
+	
+}
+footer .footer-content p {
+	color: white;
+  margin: 5px 0;
+  font-size: 14px;
+	font-weight: 400;
+  transition: all 0.5s ease;
+  
+	
+}
+footer a {
+   color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.5s ease;
+  display: inline-block;
+}
+footer a:hover {
+  font-weight: 700;
+  
+	
+}
+/* POPUP MUSIC ------------------------------------------------- */
+
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+
+.popup-backdrop.open {
+  display: flex;
+}
+
+.popup-window {
+  position: relative;
+  width: min(920px, 90vw);
+  max-height: calc(100vh - 80px);
+  background: #111111;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.popup-backdrop.open .popup-window {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* X DI USCITA */
+
+.popup-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 22px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.popup-close .close-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 999px;
+}
+
+.close-line-1 {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.close-line-2 {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* CONTENUTO POPUP --------------------------------------------- */
+
+.popup-inner {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 80px);
+}
+
+.popup-header {
+  padding: 16px 24px 10px;
+}
+
+.popup-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.popup-content {
+  padding: 0 24px 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.popup-artist-name {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+/* griglia cover: 4 -> 3 -> 2 -> 1 */
+
+.popup-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 1100px) {
+  .popup-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .popup-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .popup-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* HEADER ARTISTA NEL POPUP (nome + bio + social) */
+
+/* nome grande */
+.popup-artist-name-big {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 16px;
+}
+
+/* titoli sezioni (BIO / SOCIALS) */
+.popup-section-header {
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 16px 0 4px 0;
+}
+
+.popup-artist-bio {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+.popup-artist-social a {
+  margin-right: 12px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.popup-artist-social a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* card singolo/album */
+
+.music-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.music-cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #333;
+  margin-bottom: 6px;
+}
+
+.music-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.music-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.music-type {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.music-title {
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* hover card */
+
+.music-card:hover .music-cover {
+  transform: translateY(-2px);
+}
+
+.music-card:hover .music-title {
+  text-decoration: underline;
+}
+
+
+/* TOGGLE MOTION ----------------------------------------------- */
+
+.motion-toggle footer {
+  position: fixed;
+  bottom: 40px;
+  right: 14px;
+  padding: 8px 16px;
+  background: black;
+  color: #fff;
+  border-radius: 1px;
+  font-size: 8px;
+  font-family: Arial;
+  border: 1.4px solid rgba(255, 255, 255, 0.7);
+  z-index: 9999;
+}
+
+/* -------------------------- */
+/*     STILE PAGINA ABOUT     */
+/* -------------------------- */
+
+/* Titolo principale */
+.about-title {
+  font-family: "Arial Black", Arial, Helvetica, sans-serif;
+  font-size: clamp(32px, 7vw, 58px);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 18px;
+  color: white;
+  text-align: left; /* puoi farlo center se vuoi */
+}
+
+/* Sottotitolo (opzionale) */
+.about-subtitle {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: clamp(16px, 4vw, 22px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+	color: white;
+  margin-bottom: 22px;
+}
+
+/* Corpo del testo */
+.about-text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(14px, 3.5vw, 17px);
+  line-height: 1.5;
+  
+  max-width: 800px;
+  	color: white;
+  margin-bottom: 22px;
+}
+
+/* layout contenitore */
+.about-container {
+
+  padding: 28px 24px;
+  margin-top: 20px;
+	margin-left: 10%;
+  z-index: 2;
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .about-container {
+    padding: 40px 80px;
+  }
+}
+.about-container::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35); /* intensità dello sbiadimento */
+  pointer-events: none;
+  z-index: -3;
+}

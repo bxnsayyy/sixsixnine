@@ -1,0 +1,32 @@
+{
+  "artist1": {
+    "name": "17 RAMON",
+    "bio": "Bio dell'artista DIVI...",
+    "social": {
+      "instagram": "https://instagram.com/...",
+      "youtube": "https://youtube.com/..."
+    },
+    "releases": []
+  },
+
+  "artist2": {
+    "name": "DIVIETØ",
+    "bio": "Bio dell'artista RAMON...",
+    "social": {
+      "instagram": "https://instagram.com/...",
+      "tiktok": "https://tiktok.com/@...",
+      "youtube": "https://youtube.com/..."
+    },
+    "releases": []
+  },
+
+  "artist3": {
+    "name": "BXNSAY",
+    "bio": "Bio BXNSY...",
+    "social": {
+      "instagram": "https://instagram.com/..."
+    },
+    "releases": []
+  }
+}
+

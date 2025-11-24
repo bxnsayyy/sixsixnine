@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>SWAG ERA 6 – Members</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- SFONDO + NUVOLI -->
+  <div class="background-layer">
+     <img src="images/sfondo.png" alt="" class="bg-image" />
+    <div class="clouds">
+      <img src="images/nuvola.png" alt="" class="cloud cloud-left" />
+      <img src="images/nuvola2.png" alt="" class="cloud cloud-right" />
+    </div>
+  </div>
+
+  <div class="page-wrapper">
+    <!-- HEADER: LOGO A SINISTRA, NAV CENTRALE, MENU DESTRA -->
+    <header class="site-header">
+      <div class="header-left">
+        <a href="members.html" class="logo-link">
+          <img src="images/logo.png" alt="SWAG ERA 6" class="logo-img" />
+        </a>
+      </div>
+
+      <nav class="header-center">
+        <a href="members.html" class="nav-btn active">MEMBERS</a>
+        <span class="nav-divider">|</span>
+        <a href="brand6.html" class="nav-btn">BRAND 6</a>
+      </nav>
+
+      <div class="header-right">
+  <div class="header-placeholder"></div>
+</div>
+
+    </header>
+
+    <!-- STAGE CENTRALE: 669 + ARTISTI + NUVOLI DAVANTI -->
+    <main class="main-stage">
+      <section class="artists-strip" id="artists-strip">
+        <!-- ARTISTA SINISTRA – NUMERO 6 -->
+        <article class="artist-card" data-artist="artist1">
+        
+          <div class="artist-photo">
+            <img src="images/pic_ramon.png" alt="Artist 1" />
+          </div>
+        </article>
+
+        <!-- ARTISTA CENTRALE – NUMERO 6 -->
+        <article class="artist-card" data-artist="artist2">
+          
+          <div class="artist-photo">
+            <img src="images/pic_divi.png" alt="Artist 2" />
+          </div>
+        </article>
+
+        <!-- ARTISTA DESTRA – NUMERO 9 -->
+        <article class="artist-card" data-artist="artist3">
+          
+          <div class="artist-photo">
+            <img src="images/ph_bxnsy_3.png" alt="Artist 3" />
+          </div>
+        </article>
+      </section>
+
+ 
+    </main>
+
+    <footer>
+		<div class="footer-content">
+     <p>Powered by @swagera6</p>
+			<a href="about.html" target="_blank" style="font-size: 20px"><strong>ABOUT</strong></a>  
+      <p>
+        <a href="https://www.instagram.com/bxnsayyy/" target="_blank">Instagram</a>  
+        <a href="https://www.tiktok.com/@bxnsayyy?lang=it-IT" target="_blank">TikTok</a>  
+        <a href="https://open.spotify.com/artist/7gRcd2vjep1X5KYaXJF7po?si=k4wWpbGEQlKoCiQzQu55Vw" target="_blank">Spotify</a>
+      <button id="motion-toggle" class="motion-toggle">MOTION: ON</button>
+			</p> 
+	  </div><!-- footer che compilerai tu -->
+    </footer>
+  </div>
+
+  <!-- POPUP MUSIC -->
+    <!-- POPUP MUSIC -->
+  <div class="popup-backdrop" id="artist-popup">
+    <div class="popup-window" id="popup-window">
+      <button class="popup-close" id="popup-close" aria-label="Chiudi popup">
+        <span class="close-line close-line-1"></span>
+        <span class="close-line close-line-2"></span>
+      </button>
+
+      <div class="popup-inner">
+        <header class="popup-header">
+          <!-- NOME ARTISTA GRANDE -->
+          <div class="popup-artist-name-big" id="popup-artist-name-big"></div>
+          <!-- TITOLO MUSIC (come prima) -->
+          <div class="popup-title">MUSIC</div>
+        </header>
+
+        <section class="popup-content">
+          <!-- GRIGLIA USCITE -->
+          <div class="popup-grid" id="popup-grid"></div>
+
+          <!-- BIO -->
+          <div class="popup-title">BIO</div>
+          <div class="popup-artist-bio" id="popup-artist-bio"></div>
+
+          <!-- SOCIALS -->
+          <div class="popup-title">SOCIALS</div>
+          <div class="popup-artist-social" id="popup-artist-social"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <script src="script.js"></script>
+</body>
+</html>
+
