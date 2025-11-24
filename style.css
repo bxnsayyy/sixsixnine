@@ -115,7 +115,6 @@ body {
 .logo-img {
   width: 60px;
   height: auto;
-	z-index: -2;
 }
 
 /* NAV CENTRALE */
@@ -145,7 +144,7 @@ body {
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   opacity: 0.7;
