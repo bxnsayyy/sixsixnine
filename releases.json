@@ -1,9 +1,10 @@
 {
   "artist1": {
     "name": "17 RAMON",
-    "bio": "Bio dell'artista DIVI...",
+    "bio": "Bio dell'artista Ramagna imperiale...",
     "social": {
-      "instagram": "https://instagram.com/...",
+      "instagram": "https://www.instagram.com/souljaramon/",
+      "Spotify": "https://open.spotify.com/intl-it/artist/0AStZh5vjJOVqncOnNeH4U",
       "youtube": "https://youtube.com/..."
     },
     "releases": []
@@ -11,9 +12,9 @@
 
   "artist2": {
     "name": "DIVIETØ",
-    "bio": "Bio dell'artista RAMON...",
+    "bio": "Bio dell'artista divi...",
     "social": {
-      "instagram": "https://instagram.com/...",
+      "instagram": "https://www.instagram.com/divieto669/",
       "tiktok": "https://tiktok.com/@...",
       "youtube": "https://youtube.com/..."
     },
@@ -24,7 +25,8 @@
     "name": "BXNSAY",
     "bio": "Bio BXNSY...",
     "social": {
-      "instagram": "https://instagram.com/..."
+      "instagram": "https://www.instagram.com/bxnsayyy/",
+      "Spotify": "https://open.spotify.com/intl-it/artist/7gRcd2vjep1X5KYaXJF7po"
     },
     "releases": []
   }
